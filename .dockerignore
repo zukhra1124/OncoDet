@@ -1,0 +1,39 @@
+# Python
+.venv/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Git / IDE
+.git/
+.gitignore
+.vscode/
+.idea/
+**/.DS_Store
+
+# Large data — not needed at runtime
+data/
+dcm/
+tashxis.docx
+tashxis_full.txt
+tashxis_parse.txt
+
+# Generated reports
+*.pdf
+generate_diploma_report.py
+dataset_prepare.py
+
+# Runtime dirs (will be created by Docker or mounted as volumes)
+backend/uploads/
+backend/logs/
+
+# Test scripts
+backend/test_*.py
+backend/compare_models.py
+backend/validate_professional.py

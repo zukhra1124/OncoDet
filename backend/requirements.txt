@@ -1,0 +1,13 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+flask==3.0.0
+flask-cors==4.0.0
+torch==2.5.1+cpu
+torchvision==0.20.1+cpu
+Pillow==10.4.0
+numpy==1.26.4
+opencv-python-headless==4.9.0.80
+scikit-learn==1.5.2
+tqdm==4.66.5
+pydicom==2.4.4
+python-docx==1.1.2
+gunicorn==22.0.0
