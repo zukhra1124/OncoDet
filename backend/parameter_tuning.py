@@ -243,9 +243,9 @@ def grid_search(data_dir: str, save_csv: bool = True):
     print(f"  Precision : {best_recall_result['precision']:.4f}  "
           f"(FP = {best_recall_result['FP']})")
     print(f"  F1-Score  : {best_recall_result['f1']:.4f}")
-    print(f"\n  To apply these settings, update config.py:")
-    print(f"    CONFIDENCE_THRESHOLD = {best_recall_result['threshold']:.2f}")
-    print(f"    # in prediction.py: temperature = {best_recall_result['temperature']:.1f}")
+    print(f"\n  Recommended settings for this project:")
+    print(f"    CONFIDENCE_THRESHOLD = {best_recall_result['threshold']:.2f}  # already applied in backend/config.py")
+    print(f"    TEMPERATURE_SCALING = {best_recall_result['temperature']:.1f}  # already applied in backend/config.py and used by backend/services/prediction.py")
     print(f"{'='*60}\n")
 
     # ── Save CSV ───────────────────────────────────────────────────────────────

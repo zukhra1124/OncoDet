@@ -27,6 +27,7 @@ CLASS_NAMES = ["CANCER", "NORMAL"]
 # Objective: minimise False Negatives (missed cancer patients).
 # Grid Search result: threshold=0.45, temperature=0.8 → Recall=1.0, FN=0, F1=0.9474
 CONFIDENCE_THRESHOLD = 0.45
+TEMPERATURE_SCALING = 0.8
 
 # federated learning defaults
 NUM_CLIENTS = 4
