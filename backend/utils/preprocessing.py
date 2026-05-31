@@ -55,13 +55,15 @@ def get_transform():
     ])
 
 
-def preprocess_image(image_source, detect_phone_image=True):
+def preprocess_image(image_source, detect_phone_image=False):
     """
     Take an image (path, bytes, or PIL object), run it through the
     preprocessing pipeline, and return the tensor + original PIL image.
     The PIL image is kept around because Grad-CAM needs it for the overlay.
-    
-    Auto-detects phone-captured images and applies enhancement.
+
+    detect_phone_image is disabled by default because the model was validated
+    without phone enhancement — applying it at inference time causes a
+    distribution shift that breaks calibration.
     """
     # figure out what we got and open it
     if isinstance(image_source, str):
@@ -73,19 +75,15 @@ def preprocess_image(image_source, detect_phone_image=True):
     else:
         raise ValueError(f"Unsupported image source type: {type(image_source)}")
 
-    # Detect if this is likely a phone-captured image
-    # Simple heuristic: if resolution is unusual or metadata suggests phone
-    is_phone_image = False
+    # Apply phone image enhancement only if explicitly requested.
+    # NOT used by default: the model was trained/calibrated without it.
     if detect_phone_image:
         w, h = pil_image.size
-        # Phone photos often have 16:9 or 4:3 aspect ratio and moderate resolution
         aspect_ratio = w / h if h > 0 else 1.0
         is_phone_image = (0.75 < aspect_ratio < 1.33) and (500 < w < 4000)
-    
-    # Apply phone image enhancement if detected
-    if is_phone_image:
-        pil_image = enhance_phone_image(pil_image, is_phone_image=True)
-    
+        if is_phone_image:
+            pil_image = enhance_phone_image(pil_image, is_phone_image=True)
+
     # X-rays are often grayscale, model needs RGB
     pil_image = pil_image.convert("RGB")
 

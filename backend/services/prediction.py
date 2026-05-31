@@ -12,6 +12,10 @@ import torch.nn.functional as F
 from models.model_loader import get_model, get_device
 from config import CLASS_NAMES, CONFIDENCE_THRESHOLD, TEMPERATURE_SCALING
 
+# Predictions below this confidence level are flagged for physician review.
+# Kept higher than CONFIDENCE_THRESHOLD so that marginal calls get reviewed.
+REVIEW_THRESHOLD = 0.65
+
 
 def predict(image_tensor, use_temperature_scaling=True, temperature=TEMPERATURE_SCALING):
     """
@@ -49,7 +53,7 @@ def predict(image_tensor, use_temperature_scaling=True, temperature=TEMPERATURE_
         for i in range(len(CLASS_NAMES))
     }
 
-    needs_review = confidence < CONFIDENCE_THRESHOLD
+    needs_review = confidence < REVIEW_THRESHOLD
 
     return {
         "predicted_class": predicted_class,
