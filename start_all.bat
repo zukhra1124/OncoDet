@@ -16,14 +16,14 @@ timeout /t 2 /nobreak
 REM Start Backend in new terminal
 echo Starting Backend Server (port 5001)...
 cd backend
-start "Backend - Pneumonia Detection" cmd /k python app.py
+start "Backend - OncoDet" cmd /k python app.py
 cd ..
 timeout /t 3 /nobreak
 
 REM Start Frontend in new terminal  
 echo Starting Frontend Server (port 5175)...
 cd frontend
-start "Frontend - Pneumonia Detection" cmd /k npm run dev
+start "Frontend - OncoDet" cmd /k npm run dev
 cd ..
 
 echo.
